@@ -1,0 +1,73 @@
+/**
+ * All of the CSS for your dashboard-specific functionality should be
+ * included in this file.
+ */
+
+#threefive-support {
+	
+}
+	#threefive-support label {
+		display: block;
+		margin-bottom: 8px;
+		color: #999;
+	}
+
+	#threefive-support input[type=text] {
+		padding: 5px;
+	}
+
+	#threefive-support input[type=text].error,
+	#threefive-support textarea.error {
+		border-color: #12b1e5;
+	}
+
+	#threefive-support textarea {
+		padding: 5px;
+	}
+
+	#threefive-support input[type=submit] {
+
+	}
+
+	#threefive-support span.is-required {
+		color: #12b1e5;
+	}
+
+#message-box {
+	display: none;
+}
+
+#message-box.error {
+	display: block;
+	color: #f04124;
+}
+
+#message-box.updated {
+	display: block;
+	color: #43ac6a;
+}
+
+#disclaimer {
+
+}
+
+#disclaimer p {
+	font-style: italic;
+	font-style: .85rem;
+}
+
+.loader {
+	display: none;
+	background: url('/wp-admin/images/spinner-2x.gif') no-repeat;
+	background-size: 32px 32px;
+	/*float: right;*/
+	opacity: .7;
+	filter: alpha(opacity=70);
+	width: 32px;
+	height: 32px;
+	margin: 5px 5px 0;
+}
+
+.loader.show {
+	display: inline-block;
+}

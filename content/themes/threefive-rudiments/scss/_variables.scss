@@ -1,0 +1,86 @@
+// ==========================
+// Rudiments Theme Variables
+// ~ Add and change your global theme variables here
+// ==========================
+
+
+// ==========================
+// Media Queries & Grid
+// You may chose to use media queries in one of two ways.
+// 
+// 1: For the more advanced users and for a truly Mobile First approach, specify your media queries, grid rows and columns when you need them.
+//    Let the content define your breakpoints (when it looks bad, Breakpoint!).
+//    http://bradfrostweb.com/blog/post/7-habits-of-highly-effective-media-queries/
+// 
+// 2: Use the predefined grid system. Just set $use-rudiments-grid to true.
+//    You can edit and modify your grid classes and breakpoints in /base/_grid.scss
+// ==========================
+$use-rudiments-grid: false;
+
+// MQs
+$small: 320px, true, true;
+$medium: 768px, true, true;
+$large: 1024px, true, true;
+$xlarge: 1280px, true, true;
+
+// Rows
+$row-width         : rem-calc(1140);
+$row-width-min     : rem-calc(960);
+
+// Columns
+$wide-columns : 12;
+$desktop-columns : 12;
+$tablet-columns : 6;
+$mobile-columns : 4;
+$gutters: rem-calc(20);
+
+// ==========================
+// Site Defaults
+// ==========================
+$site-bg-color: #fff;
+$site-copy-color: #565656;
+
+// ==========================
+// Color Palate
+// ==========================
+
+// Alerts
+$alert-warning:		#f08a24;
+$alert-error:		#f04124;
+$alert-success:		#43ac6a;
+$alert-info:		#008cba;
+
+// Black and White
+$black:		#000;
+$white:		#fff;
+
+// Brand or Site colors
+$primary-color:		#12b1e5;
+$secondary-color:	rgb(60, 60, 60);
+
+// Links
+$link-color:        $primary-color;
+$link-hover:        darken($link-color, 11%);
+
+
+// ==========================
+// Typography
+// ==========================
+$base-font-size: 16px !default;
+$sans-serif: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
+$serif: "Georgia", Cambria, Times New Roman, Times, serif;
+// Add your custom fonts here
+$oswald: "Oswald", Arial, sans-serif;
+
+// Headings
+// http://typecast.com/blog/a-more-modern-scale-for-web-typography
+$h1-font-size: rem-calc(48px) !default;
+$h2-font-size: rem-calc(36px) !default;
+$h3-font-size: rem-calc(28px) !default;
+$h4-font-size: rem-calc(20px) !default;
+$h5-font-size: rem-calc(18px) !default;
+$h6-font-size: rem-calc(14px) !default;
+$heading-color: #222 !default;
+$heading-font-weight: bold !default;
+$heading-font-style: normal !default;
+$heading-font-family: $sans-serif !default;

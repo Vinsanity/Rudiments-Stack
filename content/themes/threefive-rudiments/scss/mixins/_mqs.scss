@@ -1,0 +1,61 @@
+// ========================================
+// Media Queries Mixin
+// ~ Assumes mobile first approach
+// ========================================
+// 
+// @vars
+// $breakpoint - The breakpoint in pixels. Uses the rem_calc() function to calculate the min-# or max-# value.
+// $width - If true, this mq is triggered by width. If false, it will be triggered by height. Default: true.
+// $min - If true, this min-(width/height) mq, If false, it will be a max-(width/height) mq. Default true
+// 
+// Usage: @include mq(768px);
+// Output: @media (min-width: 48rem; ) { @content; }
+// 
+@mixin mq($breakpoint, $width: true, $min: true) {
+    // Retina
+    @if $breakpoint == retina {
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { @content; }
+    }
+    // if width mq
+    @elseif $width {
+
+        // min-width
+        @if $min {
+            @media (min-width: rem-calc($breakpoint)) { @content; }
+        }
+        // max-width
+        @else {
+            @media (max-width: rem-calc($breakpoint)) { @content; }
+        }
+
+    }
+
+    // if height mq
+    @else {
+
+        // min-height
+        @if $min {
+            @media (min-height: rem-calc($breakpoint)) { @content; }
+        }
+        // max-height
+        @else {
+            @media (max-height: rem-calc($breakpoint)) { @content; }
+        }
+
+    }
+
+}
+
+// ========================================
+//  No Media Queries
+//  + Fallbacks for IE8 and browsers that do not support media queries
+// ========================================
+
+@mixin no-mq {
+
+    html.no-mediaqueries &,
+    html.lt-ie9 & {
+        @content;
+    }
+
+}

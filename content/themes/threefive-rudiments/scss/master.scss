@@ -1,0 +1,24 @@
+/*
+This is the master stylesheet for Rudiments/
+
+This file will import the extracted SCSS files defined below. 
+Add your media queries here and import files specific to those breakpoints.
+ */
+
+// Functions
+@import "functions";
+
+// Variables
+@import "_variables";
+
+// Mixins
+@import "mixins/compose";
+
+// Base
+@import "base/compose";
+
+// Content
+@import "content/compose";
+
+// Components
+@import "components/compose";

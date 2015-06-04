@@ -1,0 +1,29 @@
+// Theme header styles
+
+header.site-header {
+
+}
+
+@include mq(768px) {
+	header.site-header {
+
+	}
+}
+
+@include mq(1024px) {
+	header.site-header {
+
+	}
+}
+
+@include mq(1280px) {
+	header.site-header {
+
+	}
+}
+
+@include mq(retina) {
+	header.site-header {
+
+	}
+}

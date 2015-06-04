@@ -1,0 +1,97 @@
+// ========================================
+// Vertical Alignment 
+// usage @include v-align(%50, -%50);
+// ========================================
+@mixin v-align($top: 50%, $translate: -50%) {
+  position: relative;
+  margin: 0;
+  top: $top;
+  -webkit-transform: translateY($translate);
+  -ms-transform: translateY($translate);
+  transform: translateY($translate);
+}
+
+// Clearfix
+@mixin clearfix {
+    &:after { 
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// ========================================
+//  Touch & Pointer Bug Fix
+//  + Disable text select on clickable elements for pointer & touch events
+// ========================================
+
+// NOTE: This should be utilized for elements that have a JS
+// touchstart or pointerdown event bound to them
+
+%touch {
+	-webkit-touch-callout: none;
+ 	-webkit-user-select: none;
+ 	-khtml-user-select: none;
+ 	-moz-user-select: none;
+ 	-ms-touch-select: none;
+ 	-ms-user-select: none;
+ 	user-select: none;
+}
+
+// Flexbox
+@mixin flexbox() {
+    display:  -webkit-box;
+    display: -webkit-flex;
+    display:     -moz-box;
+    display:  -ms-flexbox;
+    display:         flex;
+}
+
+@mixin flex($values) {
+    -webkit-box-flex: $values;
+    -webkit-flex:     $values;
+       -moz-box-flex: $values;
+        -ms-flex:     $values;
+            flex:     $values;
+    -ms-flex-preferred-size: auto;
+}
+
+// CSS3 Animations
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-o-keyframes $animation_name {
+        @content;
+    }
+ 
+    @keyframes $animation_name {
+        @content;
+    }
+}
+
+@mixin animation($properties) {
+    -webkit-animation: #{$properties};
+       -moz-animation: #{$properties};
+         -o-animation: #{$properties};
+            animation: #{$properties};
+}
+
+@mixin transition($properties) {
+    -webkit-transition: #{$properties};
+       -moz-transition: #{$properties};
+         -o-transition: #{$properties};
+            transition: #{$properties};
+}
+
+@mixin transform($properties) {
+    -webkit-transform: #{$properties};
+       -moz-transform: #{$properties};
+         -o-transform: #{$properties};
+            transform: #{$properties};
+}

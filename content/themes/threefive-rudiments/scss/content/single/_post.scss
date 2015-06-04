@@ -1,0 +1,19 @@
+// Default single post styles
+// 
+// Create a new SCSS partials "_CUSTOM-POST-TYPE.scss" for your custom post types.
+// You can import them in the _all.scss file in the parent folder "/scss/content"
+
+.single {
+
+.book {
+	
+}
+
+@include mq(520, true, true) {
+	.book {
+		@include grid-column($columns: 4, $gutter: 20);
+		margin: 2em 0;
+	}
+}
+
+}

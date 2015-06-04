@@ -1,0 +1,127 @@
+// ===========================
+// Grid System
+//
+// See /mixins/_grid.scss for a full list of vars to use with your grid.
+// Change these as you see fit and make your own classes.
+// 
+// Based on the media queries defined below:
+// .wide /*overwrites*/ .desktop /*overwrites*/ .tablet /*overwrites*/ .mobile
+// ===========================
+
+@mixin rudiments-grid () {
+	// // MQs
+	// $small: 320px, true, true;
+	// $medium: 768px, true, true;
+	// $large: 1024px, true, true;
+	// $xlarge: 1280px, true, true;
+
+	// Columns
+	$wide-columns : 12 !default;
+	$desktop-columns : 12 !default;
+	$tablet-columns : 6 !default;
+	$mobile-columns : 4 !default;
+	$gutters: rem-calc(20) !default;
+
+	.row {
+		@include grid-row();
+
+		&.nested {
+			@include grid-row('nested', false, false);
+		}
+		&.collapse {
+			@include grid-row('collapse', false, false);
+		}
+		&.no-gutter {
+			@include grid-row('collapse', false, 0);
+		}
+	}
+
+
+	.column, .columns {
+		@include grid-column($gutter: $gutters);
+
+		&.full {
+			@include grid-column($gutter: 0);		
+		}
+		&.center {
+			@include grid-column($float: false, $center: true);
+		}
+	}
+
+	.colum.last {
+		float: right;
+	}
+
+	// Mobile
+	@include mq($small...) {
+		@for $i from 1 through $mobile-columns {
+			.mobile-#{$i} {
+				width: grid-calc( $i, $mobile-columns );
+			}
+			.mobile-push-#{$i} {
+				@include grid-column($push: $i);
+			}
+
+			.mobile-pull-#{$i} {
+				@include grid-column($pull: $i);
+			}
+			.mobile-offset-#{$i} {
+				@include grid-column($offset: $i);
+			}
+		}
+	}
+
+
+	@include mq($medium...) {
+		// tablet
+		@for $i from 1 through $tablet-columns {
+			.tablet-#{$i} {
+				width: grid-calc( $i, $tablet-columns );
+			}
+			.tablet-push-#{$i} {
+				@include grid-column($push: $i);
+			}
+
+			.tablet-pull-#{$i} {
+				@include grid-column($pull: $i);
+			}
+		}
+	}
+
+	@include mq($large...) {
+		// Desktop
+		@for $i from 1 through $desktop-columns {
+			.desktop-#{$i} {
+				width: grid-calc( $i, $desktop-columns );
+			}
+			.desktop-push-#{$i} {
+				@include grid-column($push: $i);
+			}
+
+			.desktop-pull-#{$i} {
+				@include grid-column($pull: $i);
+			}
+		}
+	}
+
+	@include mq($xlarge...) {
+		// Widescreen
+		@for $i from 1 through $wide-columns {
+			.wide-#{$i} {
+				width: grid-calc( $i, $wide-columns );
+			}
+
+			.wide-push-#{$i} {
+				@include grid-column($push: $i);
+			}
+
+			.wide-pull-#{$i} {
+				@include grid-column($pull: $i);
+			}
+		}
+	}
+}
+
+@if $use-rudiments-grid { // set in _variables.scss
+	@include rudiments-grid();
+}

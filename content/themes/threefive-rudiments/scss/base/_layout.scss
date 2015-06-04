@@ -1,0 +1,70 @@
+// Global Site Layout Styles
+
+html {
+	font-size: 100%;
+	background-color: $site-bg-color;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+body, button, input, select, textarea {
+	color: $site-copy-color;
+}
+
+body {
+	margin: 0 auto;
+	background-color: $site-bg-color;
+	font-family: $sans-serif;
+	min-width: 320px;
+	overflow-x: hidden;
+}
+
+::-moz-selection, ::selection {
+	background: $primary-color;
+	color: $white;
+	text-shadow: none;
+}
+
+@-webkit-viewport { width : device-width; }
+@-moz-viewport { width : device-width; }
+@-ms-viewport { width : device-width; }
+@-o-viewport { width : device-width; }
+@viewport { width : device-width; }
+
+// ========================================
+//	Links
+// ========================================
+
+/* Default Link Styles */
+a {
+    color: $link-color;
+    line-height: inherit;
+
+    &:hover,
+    &:focus { 
+    	color: $link-hover; 
+    	text-decoration: none;
+    }
+
+    img { 
+    	display: block;
+    	margin-bottom: 0;
+    	border:none;
+    }
+    &:link {
+    	-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+    }
+}
+
+
+// ========================================
+//	Layout
+// ========================================
+
+// Layout: global content wrap
+.content-wrap {
+	max-width: 1140px;
+	width: 100%;
+	padding: 0 rem_calc(20px);
+	margin: 0 auto;
+}

@@ -1,0 +1,133 @@
+// Typography styles
+
+// =======================
+// Headings
+// =======================
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: $heading-font-family;
+	font-weight: $heading-font-weight;
+	font-style: $heading-font-style;
+	color: $heading-color;
+	margin: .2rem 0 .5rem;
+
+	a {
+		text-decoration: none;
+	}
+}
+
+h1,
+h2 {
+	margin-top: 0;
+}
+
+h1, .h1 {
+	font-size:$h1-font-size;
+	line-height: 1.05em;
+}
+
+h2, .h2 {
+	font-size:$h2-font-size;
+	line-height: 1.25em;
+}
+
+h3, .h3 {
+	font-size:$h3-font-size;
+	font-weight: normal;
+	line-height: 1.25em;
+}
+
+h4, .h4 {
+	font-size:$h4-font-size;
+	line-height: 1.22222222em;
+}
+
+h5, .h5 {
+	font-size:$h5-font-size;
+	line-height: 1.25em;
+}
+
+h6, .h6 {
+	font-size:$h6-font-size;
+	line-height: 1.25em;
+}
+
+// =======================
+// Paragraph
+// =======================
+p {
+	margin-top: 0;
+}
+
+// =======================
+// Lists
+// =======================
+ul, ol, dl {
+	line-height: 1.33;
+    margin: 0 1.5em 1.5em 0;
+    padding: 0 0 0 1.5em;
+}
+
+ul { 
+	list-style-type: disc;
+}
+ol {
+	list-style-type: decimal;
+}
+
+ul, ol {
+	li {
+		margin: .8em 0 0;
+		
+		// nested lists
+		ul, ol {
+			margin-left: 1.25em;
+		}
+	}
+}
+
+dl {
+    padding-left: 14px;
+    dt {
+        margin-bottom: .45em;
+        font-weight: 600;
+    }
+    dd {
+        margin-bottom: .75em;
+        margin-left: 0;
+    }
+}
+
+// =======================
+// Tables
+// If for some reason you need to use tables.... *sigh*
+// =======================
+table {
+    font-size: rem-calc(16px);
+    margin: .75em 0 1.5em;
+    background-color: $white;
+    border: 1px solid $black;
+    text-align: left;
+    th {
+        padding: 14px 3% 12px;
+        background-color: grey;
+        font-weight: 600;
+        line-height: 1;
+        & ~ th {
+            border-left: 1px solid grey;
+        }
+    }
+    tbody {
+        tr {
+            & ~ tr {
+                border-top: 1px solid $black;
+            }
+        }
+    }
+    td {
+        padding: 12px 3% 10px;
+        line-height: 1.35;
+        & ~ td {
+            border-left: 1px solid $black;
+        }
+    }
+}
