@@ -108,7 +108,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= pkg._themepath %>/images/',
-                    src: ['**/*.{png,jpg,gif}'],
+                    src: ['*.{png,jpg,gif}'],
                     dest: '<%= pkg._themepath %>/images/build/'
                 }]
             }
