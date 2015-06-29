@@ -22,10 +22,9 @@
   for the `dirname(__FILE__)` method below.
   */
 
-  // define('WP_CONTENT_DIR', realpath(dirname(__FILE__) . '/content'));
-  define('WP_CONTENT_DIR', realpath($_SERVER['DOCUMENT_ROOT'] . '/content'));
-
   <% if remote_config == true %>
+  define('WP_CONTENT_DIR', realpath($_SERVER['DOCUMENT_ROOT'] . '/content'));
+  
   // Production Settings
   define('WP_DEBUG', false);
   define('WP_DEBUG_LOG', false);
@@ -40,11 +39,14 @@
   define('WP_POST_REVISIONS', 10);
   
   <% else %>
+  define('WP_CONTENT_DIR', realpath(dirname(__FILE__) . '/content'));
+  
   // Development Settings
   define('WP_DEBUG', true);
   define('WP_DEBUG_LOG', true);
   define('WP_DEBUG_DISPLAY', true);
   
+
   <% end %>
 
   if ( !defined('ABSPATH') )
