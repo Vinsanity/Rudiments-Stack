@@ -9,16 +9,16 @@ module.exports = function(grunt) {
             libs_dev: {
                 src: [
                     '<%= pkg._bowerpath %>/debug/ba-debug.js',
-                    '<%= pkg._bowerpath %>/bxslider/dist/jquery.bxslider.js',
-                    '<%= pkg._bowerpath %>/jquery.fitvids/jquery.fitvids.js',
+                    '<%= pkg._bowerpath %>/bxSlider/dist/jquery.bxslider.js',
+                    '<%= pkg._bowerpath %>/fitvids/jquery.fitvids.js',
                     '<%= pkg._bowerpath %>/jquery.transit/jquery.transit.js',
                 ], 
                 dest: '<%= pkg._themepath %>/js/libs/libs.min.js',
             },
             libs_prod: {
                 src: [
-                    '<%= pkg._bowerpath %>/bxslider/dist/jquery.bxslider.js',
-                    '<%= pkg._bowerpath %>/jquery.fitvids/jquery.fitvids.js',
+                    '<%= pkg._bowerpath %>/bxSlider/dist/jquery.bxslider.js',
+                    '<%= pkg._bowerpath %>/fitvids/jquery.fitvids.js',
                     '<%= pkg._bowerpath %>/jquery.transit/jquery.transit.js',
                     '<%= pkg._themepath %>/js/libs/*.js',
                 ], 

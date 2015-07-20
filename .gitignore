@@ -28,10 +28,12 @@ wp-config.php
 
 # Misc #
 ###################
-
 _assets
-node_modules/.bin
-node_modules/**/.bin
-node_modules/**/out
-node_modules/**/build
+dev/node_modules
+# dev/node_modules/.bin
+# dev/node_modules/**/.bin
+# dev/node_modules/**/out
+# dev/node_modules/**/build
+dev/.sass-cache
 ai-cache/*
+dev/bower_components

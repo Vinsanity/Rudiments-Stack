@@ -1,5 +1,6 @@
 /lib
 /config
+/dev
 Capfile
 Gemfile
 Gemfile.lock
