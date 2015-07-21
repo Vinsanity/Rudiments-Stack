@@ -70,9 +70,8 @@ function rudiments_remove_menu_items() {
 	if ( ! current_user_can('manage_options') ) {
 		// Removing Menu Items for all
 	    remove_menu_page('edit-comments.php'); // Remove the Tools Menu
-	    remove_menu_page('theme-global-settings'); // Remove the Theme Options Menu
+	    remove_menu_page('theme-global-settings'); // Remove the Theme Options Menu example
 	    remove_menu_page('tools.php'); // Remove the Tools Menu
-	    remove_menu_page('edit.php?post_type=acf-field-group'); // Remove the ACF Menu	
 	}
 }
 add_action( 'admin_menu', 'rudiments_remove_menu_items', 99);
@@ -106,11 +105,12 @@ function rudiments_custom_menu_order($menu_ord) {
 		
 		// 'index.php', // Dashboard
 		// 'separator1', // First separator
-		// 'edit.php', // News and Events (posts)
+		// 'edit.php', // Posts
 		// 'edit.php?post_type=page', // Pages
-		// 'edit.php?post_type=cirrus_aircraft', // Custom Post Type Example
-		// 'theme-global-settings', // ACF Options Page Example
+		// 'edit.php?post_type=custom_post_type', // Custom Post Type Example
+		// 'gf_edit_forms', // Gravity Forms
 		// 'upload.php', // Media
+		// 'theme-global-settings', // ACF Options Page Example
 		// 'separator2', // Second separator
 	);
 }
