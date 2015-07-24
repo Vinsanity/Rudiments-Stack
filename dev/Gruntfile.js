@@ -7,22 +7,28 @@ module.exports = function(grunt) {
         // Grunt Concat
         concat: {
             libs_dev: {
+                options: {
+                    sourceMap: true,
+                },
                 src: [
                     '<%= pkg._bowerpath %>/debug/ba-debug.js',
                     '<%= pkg._bowerpath %>/bxSlider/dist/jquery.bxslider.js',
                     '<%= pkg._bowerpath %>/fitvids/jquery.fitvids.js',
                     '<%= pkg._bowerpath %>/jquery.transit/jquery.transit.js',
                 ], 
-                dest: '<%= pkg._themepath %>/js/libs/libs.min.js',
+                dest: '<%= pkg._themepath %>/js/libs/libs.js',
             },
             libs_prod: {
+                options: {
+                    sourceMap: true,
+                },
                 src: [
                     '<%= pkg._bowerpath %>/bxSlider/dist/jquery.bxslider.js',
                     '<%= pkg._bowerpath %>/fitvids/jquery.fitvids.js',
                     '<%= pkg._bowerpath %>/jquery.transit/jquery.transit.js',
                     '<%= pkg._themepath %>/js/libs/*.js',
                 ], 
-                dest: '<%= pkg._themepath %>/js/libs/libs.min.js',
+                dest: '<%= pkg._themepath %>/js/libs/libs.js',
             },
             scripts: {
                 options: {
@@ -36,7 +42,8 @@ module.exports = function(grunt) {
                         '*/\n\n' +
                         'var three_five = window.three_five || {};\n\n' +
                         '(function (window, document, $, t, m) {\n\n',
-                    footer: '\n\n})(window, document, jQuery, three_five);'
+                    footer: '\n\n})(window, document, jQuery, three_five);',
+                    sourceMap: true,
                 },
                 src: [
                 // List each script individually here in the order that you want them to concatenate (top to bottom)
@@ -56,8 +63,15 @@ module.exports = function(grunt) {
                     "shiv" : true,
                     "printshiv" : false,
                     "load" : true,
+                    "flexbox": true,
+                    "csstransforms": true,
+                    "csstransforms3d": true,
+                    "csstransitions": true,
+                    "multiplebgs": false,
+                    "cssanimations": false,
+                    "svg": true,
                     "mq" : true,
-                    "cssclasses" : true
+                    "cssclasses" : true,
                 },
 
                 "extensibility" : {
@@ -122,16 +136,29 @@ module.exports = function(grunt) {
         compass: {
             dev: {
                 options: {
-                    basePath: '<%= pkg._themepath %>',
-                    config: '<%= pkg._themepath %>/config.rb',
-                    environment: 'development',
+                    basePath:       '<%= pkg._themepath %>',
+                    sourcemap:      true,
+                    cssDir:         'css',
+                    sassDir:        'scss',
+                    imagesDir:      'images',
+                    javascriptsDir: 'js',
+                    fontsDir:       'fonts',
+                    environment:    'development',
+                    outputStyle:    'expanded',
                 }
             },
             prod: {
                 options: {
-                    basePath: '<%= pkg._themepath %>',
-                    config: '<%= pkg._themepath %>/config.rb',
-                    environment: 'production',
+                    basePath:       '<%= pkg._themepath %>',
+                    sourcemap:      true,
+                    cssDir:         'css',
+                    sassDir:        'scss',
+                    imagesDir:      'images',
+                    javascriptsDir: 'js',
+                    fontsDir:       'fonts',
+                    environment:    'production',
+                    outputStyle:    'compressed',
+                    force:          true,
                 }
             }
         },
@@ -206,7 +233,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask(
         'production', [
-            'concat:libs_dev',
+            'concat:libs_prod',
             'concat:scripts',
             'modernizr:theme',
             'uglify:theme',

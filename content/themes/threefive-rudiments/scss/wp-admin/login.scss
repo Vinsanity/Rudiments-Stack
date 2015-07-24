@@ -15,7 +15,8 @@ You'll have to load your own images and mess
 with the width and height.
 */
 .login h1 a {
-	background: url(../images/rudiments.png) no-repeat top center; /* make sure to replace this! */
+	background: url(../../images/rudiments.png) no-repeat top center; /* make sure to replace this! */
+	background-size: contain;
 	width: 320px;
 	height: 294px;
 	text-indent: -9999px;
