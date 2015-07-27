@@ -1,15 +1,15 @@
 # Rudiments-Stack
 
-A framework for deploying WordPress projects with Capistrano:
+A framework for deploying WordPress projects with Capistrano.
+
+This framework is intended for WordPress projects where you(the developer/designer/agency) need to control the production environment and lock it down. After all, your production site is not just a website, it's an application. 
 
 - Automates WordPress deployments via git/github/bitbucket on any number of environments
-- Allows for deployments from within Vagrant while outside the virtual box
-- Automates database migrations between environments
-- Removes all references to development URLs in production environments (and vice versa)
-- Sychronises your WordPress `uploads/` directories between environments
+- Allows for deployments and automation from within Vagrant while outside the virtual box
+- Automates database migrations between environments and removes all references to development URLs in production environments (and vice versa)
+- Automatically disables WordPress updates, plugin updates, theme updates, and editing WordPress files on remote servers using WP CONSTANTS.
+- Synchronizes your WordPress `uploads/` directories between environments
 - Automatically prevents non-production environments from being crawled by search engines
-
-Note that Rudiments Stack is pretty strict about how you work with WordPress and git, and it may be different to what you're used to. Be sure to read [Notes on WordPress development](https://github.com/Mixd/wp-deploy/wiki/Notes-on-WordPress-development) before starting.
 
 ## Requirements
 
@@ -17,57 +17,51 @@ For Rudiments Stack (or Capistrano in general) to work you need SSH access both 
 
 Capistrano deploys your application into a symlinked `current/` directory on your server, so you'll need to set your document root to that folder.
 
-- **Bundler**: As Rudiments Stack comes with various different Ruby Dependencies, Bundler is used to make quick work of the installation process. Here's the [link](http://bundler.io/)
-- **WP-CLI**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. As these functions are required on all environments (local, staging and production servers), we make use of the WordPress Command Line Interface. You can check out the [documentation](http://wp-cli.org/#install) on how to get this setup.
+- **[Ruby Gems](https://rubygems.org/pages/download)**: Rudiments Stack uses multiple gems so you should make sure this is installed or updated to the latest version first.
+- **[Bundler](http://bundler.io/)**: Rudiments Stack uses Bundler as a Ruby Dependency manager. 
+- **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. These commands are required on all stages (local, staging, production, etc.) so be sure to install this toll on all stages. 
+- **[Node.js and npm](https://docs.npmjs.com/getting-started/installing-node)**: Node.js and npm are required to manage theme development dependancies.
+- **[Bower](http://bower.io/)**: Rudiments Stack uses bower as a theme development package manager for your frameworks, libraries, and utilities. 
+- **[Grunt](http://gruntjs.com/getting-started)**: Rudiments stack uses Grunt as a theme development task and build manager.
 
-### Keep in Mind
-If you're using MAMP, you'll have issues when trying to run MySQL commands as the PHP version in MAMP is different to the one in your $PATH. You can fix this by adding the following two lines to your `.bash_profile` (or `.zshrc`):
-
-```sh
-export MAMP_PHP=/Applications/MAMP/bin/php/php5.4.4/bin
-export PATH="$MAMP_PHP:$PATH"
-```
-
-Be sure you check the PHP version is correct and amend the path appropriately for your MAMP PHP version. see [this question on Stack Overflow](http://stackoverflow.com/questions/4145667/how-to-override-the-path-of-php-to-use-the-mamp-path/) for more info.
-
+*Why am I installing all this stuff?*
+Because it is a "Stack". Also, you're a professional. Your application should be treated the same way. 
 - - -
 
 ## Installation
-Here's a step by step guide of getting **Rudiments Stack** setup.
+Here's a step by step guide for setting up a **Rudiments Stack** project.
 
 ### Getting started
 
-Firstly, you're going to need to clone the repository. There are a number of ways in which you can do this, however, seeing as this workflow requires the use of the Command Line, we recommend using that.
+First, clone the repository. This stack uses command line quite a bit so let's start there.
 
 ```sh
 cd my/desired/directory
-git clone --recursive https://github.com/3five/rudiments-stack.git
+git clone --recursive https://github.com/3five/rudiments-stack.git folder-name
 ```
 
-That will clone the repository into a folder name of your choosing and it will also download any submodules included within the repository. In this case, we have included WordPress.
+That will clone the repository into a folder name of your choosing and it will also download the WordPress submodule.
 
-Next, we need to reinialise it as its own repository rather than having it connected to the current origin. We're using a simple bash script that does most of the leg work for you, so once you've cloned the repo, just run:
+Next, we need to reinitialize the project as its own repository rather than having it connected to the current origin. We're using a simple bash script that does most of the leg work for you, so once you've cloned the repo, just run:
 
 ```sh
 $ bash config/prepare.sh
 ```
-Then all you need to do is add your own remote origin repository:
+Now add your own remote origin repository:
 
 ```sh
 $ git remote add origin <repo_url>
 ```
 
-And finally, install the Ruby dependencies for the framework via Bundler:
+Finally, install the Ruby dependencies for the framework via Bundler:
 
 ```sh
 $ bundle install
 ```
 
-You're now ready to set up your configuration files.
-
 ### Configuration
 
-First off, you need to set your global WP settings under the "WordPress" heading in `config/deploy.rb`:
+Set your global WP settings under the "WordPress" heading in `config/deploy.rb`:
 
 ```ruby
 set :wp_user, "3five" # The admin username
@@ -76,7 +70,7 @@ set :wp_sitename, "Rudiments Stack" # The site title
 set :wp_localurl, "http://localhost.dev" # Your local environment URL
 ```
 
-These are the settings used for your inital installation of WordPress. You also need to define your git repository in the same file:
+These are the settings used for your initial installation of WordPress. You also need to define your git repository in the same file:
 
 ```ruby
 set :application, "rudiments-stack"
@@ -91,15 +85,17 @@ server "XXX.XXX.XX.XXX", user: "SSHUSER", roles: %w{web app db}
 set :deploy_to, "/deploy/to/path"
 set :branch, "master"
 ```
-This is where you define your SSH access to the remote server, and the full path which you plan to deploy to. the `stage_url` is used when generating your `wp-config.php` file during installation.
+This is where you define your SSH access to the remote server, and the full path which you plan to deploy to. The `stage_url` is used when generating your `wp-config.php` file during installation.
 
 `server` can be an IP address or domain; prefixing with `http://` is not needed either way. 
 
-You also need to rename `database.example.yml` to `database.yml` and fill it with the database details for each environment, including your local one. This file should stay ignored in git.
+`SSHUSER` should be whichever user owns the directory you've set in  `:deploy_to`. Additional options are found in the stage config files for SSH passwords and other access related options.
+
+You also need to duplicate `database.example.yml` rename it `database.yml` and fill it with the database details for each environment, including your local one. This file should stay ignored in git.
 
 #### .wpignore
 
-By default, Capistrano deploys every file within in your repo, including config files, dotfiles, and various other stuff that's of no use on your remote environment. To get around this, Rudiments Stack uses a `.wpignore` file which lists all files and directories you don't want to be deployed, in a similar way to how `.gitginore` prevents files from being checked into your repo.
+By default, Capistrano deploys every file within in your repository. To bypass this, Rudiments Stack uses a `.wpignore` file which lists all files and directories you don't want to be deployed, in a similar way to how `.gitginore` prevents files from being checked into your repository.
 
 ### Usage
 
@@ -113,8 +109,8 @@ To set up WordPress on your local server, run the following command:
 $ bundle exec cap production wp:setup:local
 ```
 **Some notes for Vagrant users.**
-- You **must** uncomment the `vagrant_local` variable at the top of deploy.rb which sets the vagrant_local variable to true. This will allow all your local Capistrano functions to occur within the vagrant virtual box where applicable.
-- In the vagrant.rb file please read the instructions and set your config according to your Vagrant SSH settings
+- You **must** uncomment the `vagrant_local` variable at the top of deploy.rb which sets the vagrant_local variable to true. This will allow all your local Capistrano functions to occur within the vagrant virtual box (where applicable).
+- Please read the instructions in the vagrant.rb file and set your config according to your Vagrant SSH settings
 
 **Remote environments**
 
@@ -128,16 +124,22 @@ or
 $ bundle exec cap staging wp:setup:remote
 ```
 
-This will install WordPress using the details in your configuration files, and make your first deployment on your production server. Rudiments Stack will generate a random password and give it to you at the end of the task, so be sure to write it down and change it to something more memorable when you log in.
+This will install WordPress using the details in your configuration files, and make your first deployment on your production server. Rudiments Stack will generate a random password and give it to you at the end of the task.
 
-You can also save time and set up both your remote and local environments with `bundle exec cap production wp:setup:both`.
+You can also save time and set up both your remote and local environments with `bundle exec cap production wp:setup:both` if they're both ready.
 
 #### Deploying
 
-To deploy your code-base to the remote server:
+__ATTENTION__: You **must** add->commit->push your code-base to your remote git repo before proceeding.
 
+To deploy your code-base to the remote server:
+**Production**:
 ```sh
 $ bundle exec cap production deploy
+```
+or **Staging**:
+```sh
+$ bundle exec cap staging deploy
 ```
 
 That will deploy everything in your repository and submodules, excluding any files and directories in your `.wpignore` file.
