@@ -58,19 +58,19 @@
 
 // CSS3 Animations
 @mixin keyframe ($animation_name) {
-    @-webkit-keyframes $animation_name {
+    @-webkit-keyframes #{$animation_name} {
         @content;
     }
  
-    @-moz-keyframes $animation_name {
+    @-moz-keyframes #{$animation_name} {
         @content;
     }
  
-    @-o-keyframes $animation_name {
+    @-o-keyframes #{$animation_name} {
         @content;
     }
  
-    @keyframes $animation_name {
+    @keyframes #{$animation_name} {
         @content;
     }
 }

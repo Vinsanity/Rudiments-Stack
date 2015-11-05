@@ -3,18 +3,18 @@
  * Rudiments theme setup.
  *
  * @since rudiments 1.0
- * 
+ *
  * Based on:
  * Bones by Eddie Machado
  * @link http://themble.com/bones/
- * 
+ *
  * _S (Underscores) by Automatic
  * @link http://underscores.me/
  */
 
 
 /**
- * "Can I count it off? 
+ * "Can I count it off?
  * 1, 2, 3, 4. Get on Up!"
  *
  * Set up theme defaults and add support for WordPress features.
@@ -25,7 +25,7 @@ if ( ! function_exists( 'rudiments_count_it_off' ) ) {
 
 		// Clean out the HEAD
 		add_action( 'init', 'rudiments_clear_head' );
-		
+
 		// Enqueue base scripts and styles
 		add_action( 'wp_enqueue_scripts', 'rudiments_styles_and_scripts', 999 );
 
@@ -43,7 +43,7 @@ if ( ! function_exists( 'rudiments_count_it_off' ) ) {
 
 		// Destroy <p> tags around images in the the_content()
 		add_filter( 'the_content', 'rudiments_destroy_ptags_on_images' );
-		
+
 		// Custom excerpt_more.
 		add_filter( 'excerpt_more', 'rudiments_excerpt_more' );
 
@@ -112,7 +112,7 @@ if ( ! function_exists( 'rudiments_clear_head' ) ) {
  * Register and Enqueue Rudiments Stylesheets and Scripts
  */
 if ( ! function_exists( 'rudiments_styles_and_scripts' ) ) {
-	
+
 	function rudiments_styles_and_scripts() {
 		if (!is_admin()) {
 
@@ -127,8 +127,8 @@ if ( ! function_exists( 'rudiments_styles_and_scripts' ) ) {
 			wp_register_style( 'rudiments-stylesheet', $css_dir . 'master.css', array(), $version, 'all' );
 			// Rudiments overwrites stylesheet.
 			wp_register_style( 'rudiments-overwrites', $css_dir . 'overwrites.css', array(), $version, 'all' );
-			
-			
+
+
 			/**
 			 * Scripts
 			 */
@@ -161,7 +161,7 @@ if ( ! function_exists( 'rudiments_styles_and_scripts' ) ) {
 
 if ( ! function_exists( 'rudiments_theme_support' ) ) {
 	function rudiments_theme_support() {
-		
+
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
@@ -196,7 +196,7 @@ if ( ! function_exists( 'rudiments_theme_support' ) ) {
  * @link http://codex.wordpress.org/Function_Reference/register_sidebar
  */
 if ( ! function_exists( 'rudiments_register_sidebars' ) ) {
-	
+
 	function rudiments_register_sidebars() {
 
 		register_sidebar( array(
@@ -219,7 +219,7 @@ if ( ! function_exists( 'rudiments_register_sidebars' ) ) {
  * @link http://codex.wordpress.org/Function_Reference/register_nav_menus
  */
 if ( ! function_exists( 'rudiments_register_nav_menus' ) ) {
-	
+
 	function rudiments_register_nav_menus() {
 
 		register_nav_menus( array(
@@ -232,7 +232,7 @@ if ( ! function_exists( 'rudiments_register_nav_menus' ) ) {
 }
 
 /**
- * Build Rudiments Nav Menus 
+ * Build Rudiments Nav Menus
  */
 // Primary Nav Menu
 function rudiments_primary_nav_menu() {
@@ -254,7 +254,7 @@ function rudiments_primary_nav_menu() {
 // Footer Nav Menu
 function rudiments_footer_nav_menu() {
 	wp_nav_menu(array(
-		'container' => '', 
+		'container' => '',
 		'container_class' => 'menu clearfix',
 		'menu' => __( 'Footer Menu', 'rudiments' ),
 		'menu_class' => 'nav footer-nav clearfix',
@@ -281,6 +281,7 @@ function rudiments_primary_nav_fallback() {
 //  */
 // if ( ! function_exists( 'rudiments_search' ) ) {
 // 	function rudiments_search($searchfoem) {
+// 		global $searchform;
 // 		$searchform = get_template_part('/content/search/searchform');
 // 		return $searchform;
 // 	}
