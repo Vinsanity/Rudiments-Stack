@@ -5,6 +5,6 @@
     "jquery.transit": "~0.9.12",
     "fitvids": "~1.1.0",
     "modernizr": "~2.8.3",
-    "bxSlider": "~4.2.3"
+    "slick-carousel": "~1.5.8"
   }
 }

@@ -16,6 +16,9 @@
 
   define('WP_CONTENT_URL', '<%= wp_siteurl %>/content');
 
+  // Set Default Theme
+  define('WP_DEFAULT_THEME', 'threefive-rudiments');
+
   /*
   Depending on your server configuration, you may find WordPress fails to find your content (themes and plugins).
   This is due to how your server returns `$_SERVER['DOCUMENT_ROOT']`. If this issue affects you, try swapping
@@ -24,7 +27,7 @@
 
   <% if remote_config == true %>
   define('WP_CONTENT_DIR', realpath($_SERVER['DOCUMENT_ROOT'] . '/content'));
-  
+
   // Production Settings
   define('WP_DEBUG', false);
   define('WP_DEBUG_LOG', false);
@@ -37,15 +40,17 @@
   define('CONCATENATE_SCRIPTS', true);
   define('IMAGE_EDIT_OVERWRITE', true);
   define('WP_POST_REVISIONS', 10);
-  
+  define('ENVIRONMENT', 'PRODUCTION');
+
   <% else %>
   define('WP_CONTENT_DIR', realpath(dirname(__FILE__) . '/content'));
-  
+
   // Development Settings
   define('WP_DEBUG', true);
   define('WP_DEBUG_LOG', true);
   define('WP_DEBUG_DISPLAY', true);
-  
+  define('ENVIRONMENT', 'DEVELOPMENT');
+
 
   <% end %>
 
