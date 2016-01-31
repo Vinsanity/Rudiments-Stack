@@ -5,10 +5,15 @@ require('babel-register')({ presets: ['es2015', 'react', 'stage-0'] })
 require('babel-polyfill')
 
 global.__args = require('yargs')
+  //.default('env', 'development')
   .boolean('production')
   .boolean('debug')
   .alias('D', 'debug')
   .alias('p', 'production')
   .argv
+
+if (global.__args.production) {
+  global.__args.env = 'production'
+}
 
 require('require-all')(path.resolve('build', 'tasks'))

@@ -51,8 +51,10 @@ gulp.task('styles:inline', ['styles'], (done)=> {
     }
   ]
 
+  const envUrl = __pkg._envUrls[__args.env]
+
   const criticalOpts = {
-    src: 'http://implantalign.dev/',
+    src: envUrl,
     dest: `${themeDir}/css/inline.css`,
     pathPrefix: '/content/themes/threefive-rudiments/css',
     minify: false,

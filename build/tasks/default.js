@@ -5,7 +5,7 @@ gulp.task('default', ['build'])
 
 const buildTasks = ['scripts', 'styles', 'images', 'static']
 
-if (args.production) {
+if (args.env === 'production') {
   buildTasks.push('styles:inline')
 }
 

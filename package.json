@@ -4,6 +4,11 @@
   "private": true,
   "_themepath": "content/themes/threefive-rudiments",
   "_pluginspath": "content/plugins",
+  "_envUrls": {
+    "development": "http://example.com",
+    "staging": "http://example.com",
+    "production": "http://example.com"
+  },
   "engines": {
     "node": ">=4.2.6",
     "npm": ">=3.0.0"
