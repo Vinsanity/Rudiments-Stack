@@ -6,6 +6,7 @@ require('babel-polyfill')
 
 global.__args = require('yargs')
   .choices('env', Object.keys(__pkg._envUrls))
+  .default('env', 'development')
   .boolean('production')
   .boolean('debug')
   .alias('D', 'debug')
