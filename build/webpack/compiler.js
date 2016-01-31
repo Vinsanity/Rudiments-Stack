@@ -4,7 +4,7 @@ import devConfig from './development'
 
 const args = global.__args
 
-export const config = args.production ? prodConfig : devConfig
+export const config = args.env === 'production' ? prodConfig : devConfig
 
 export const compiler = webpack(config)
 

@@ -15,7 +15,7 @@ gulp.task('styles', ()=> {
 
   const sassOpts = {
     sourcemap: true,
-    outputStyle: args.production ? 'compressed' : 'expanded'
+    outputStyle: args.env === 'production' ? 'compressed' : 'expanded'
   }
 
   const processors = [
@@ -51,10 +51,10 @@ gulp.task('styles:inline', ['styles'], (done)=> {
     }
   ]
 
-  const envUrl = __pkg._envUrls[__args.env]
+  const src = __pkg._envUrls[__args.env]
 
   const criticalOpts = {
-    src: envUrl,
+    src,
     dest: `${themeDir}/css/inline.css`,
     pathPrefix: '/content/themes/threefive-rudiments/css',
     minify: false,
