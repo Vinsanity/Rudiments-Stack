@@ -1,6 +1,8 @@
 /lib
 /config
-/dev
+/node_modules
+gulpfile.js
+package.json
 Capfile
 Gemfile
 Gemfile.lock
@@ -8,3 +10,4 @@ readme.md
 .gitattributes
 .gitignore
 .gitmodules
+.babelrc
