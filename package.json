@@ -4,11 +4,12 @@
   "private": true,
   "_themepath": "content/themes/threefive-rudiments",
   "_pluginspath": "content/plugins",
-  "_envUrls": {
-    "development": "http://example.com",
-    "staging": "http://example.com",
-    "production": "http://example.com"
-  },
+  "_envs": [
+    "development",
+    "staging",
+    "production"
+  ],
+  "_criticalUrl": "http://example.com",
   "engines": {
     "node": ">=4.2.6",
     "npm": ">=3.0.0"
@@ -37,10 +38,14 @@
     "gulp-sourcemaps": "^1.6.0",
     "imagemin-pngquant": "^4.2.0",
     "lodash": "^3.10.1",
+    "modernizr": "^3.3.1",
     "nyansole": "^0.5.1",
     "postcss-flexibility": "^1.0.1",
     "require-all": "^2.0.0",
     "webpack": "^1.12.9",
     "yargs": "^3.32.0"
+  },
+  "dependencies": {
+    "flexibility": "^1.0.5"
   }
 }

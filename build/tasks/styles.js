@@ -51,12 +51,12 @@ gulp.task('styles:inline', ['styles'], (done)=> {
     }
   ]
 
-  const src = __pkg._envUrls[__args.env]
+  const src = __pkg._criticalUrl
 
   const criticalOpts = {
     src,
-    dest: `${themeDir}/css/inline.css`,
-    pathPrefix: '/content/themes/threefive-rudiments/css',
+    dest: `${themeDir}/assets/css/inline.css`,
+    // pathPrefix: '/content/themes/threefive-rudiments/assets/css',
     minify: false,
     dimensions
   }

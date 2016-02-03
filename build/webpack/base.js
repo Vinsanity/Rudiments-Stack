@@ -5,23 +5,26 @@ const args = global.__args
 
 export default {
   context: path.resolve(themeDir, 'scripts'),
-  
-  entry: './compose',
-  
+
+  entry: {
+    scripts: './compose',
+    polyfills: ['./vendors/modernizr', 'flexibility']
+  },
+
   output: {
     path: path.resolve(themeDir, 'assets', 'js'),
-    filename: 'scripts.js'
+    filename: '[name].js'
   },
-  
+
   externals: {
     'jquery': 'jQuery',
     'lodash': '_',
     'underscore': '_',
     'backbone': 'Backbone'
   },
-  
+
   module: {
-    loaders: [{ 
+    loaders: [{
       test: /\.jsx?$/,
       loader: 'babel'
     }]

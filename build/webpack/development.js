@@ -4,7 +4,7 @@ import base from './base'
 const args = global.__args
 
 export default merge({}, base, {
-  
-  devtool: 'cheap-source-map'
+
+  devtool: 'source-map'
 
 })

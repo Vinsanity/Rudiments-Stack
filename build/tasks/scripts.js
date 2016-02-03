@@ -1,62 +1,34 @@
 import gulp from 'gulp'
 import path from 'path'
-import modernizr from 'customizr'
+import modernizr from 'modernizr'
+import fs from 'fs'
 import { compiler, handleWebpackResults } from '../webpack/compiler'
 
 const themeDir = path.resolve(__pkg._themepath)
 
-gulp.task('scripts', (done)=> {
+gulp.task('scripts', ['modernizr'], (done)=> {
   compiler.run(handleWebpackResults(false, done))
 })
 
-gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
-  done()
-  // const customizerOpts = {
+gulp.task('modernizr', (done)=> {
+  const customizerOpts = {
 
-  // extra: {
-  //   shiv              : true,
-  //   printshiv         : false,
-  //   load              : true,
-  //   flexbox           : true,
-  //   csstransforms     : true,
-  //   csstransforms3d   : true,
-  //   csstransitions    : true,
-  //   multiplebgs       : false,
-  //   cssanimations     : false,
-  //   svg               : true,
-  //   mq                : true,
-  //   cssclasses        : true,
-  // },
+    options: [
+      'addTest',
+      'domPrefixes',
+      'hasEvent',
+      'html5shiv',
+      'html5printshiv',
+      'load',
+      'prefixed',
+      'prefixes',
+      'testAllProps',
+      'testProp',
+      'testStyles'
+    ],
 
 
-
-  // extensibility: {
-  //   addtest           : true,
-  //   prefixed          : true,
-  //   teststyles        : true,
-  //   testprops         : true,
-  //   testallprops      : true,
-  //   hasevents         : false,
-  //   prefixes          : true,
-  //   domprefixes       : true
-  // },
-
-  //   options: [
-  //     'addTest',
-  //     'domPrefixes',
-  //     'hasEvent',
-  //     'html5shiv',
-  //     'html5printshiv',
-  //     'load',
-  //     'prefixed',
-  //     'prefixes',
-  //     'testAllProps',
-  //     'testProp',
-  //     'testStyles'
-  //   ],
-
-
-  //   'feature-detects': [
+    'feature-detects': [
   //     'a/download',
   //     'ambientlight',
   //     'applicationcache',
@@ -93,7 +65,7 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'css/borderradius',
   //     'css/boxshadow',
   //     'css/boxsizing',
-  //     'css/calc',
+      'css/calc',
   //     'css/checked',
   //     'css/chunit',
   //     'css/columns',
@@ -104,10 +76,10 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'css/escape',
   //     'css/exunit',
   //     'css/filters',
-  //     'css/flexbox',
+      'css/flexbox',
   //     'css/flexboxlegacy',
   //     'css/flexboxtweener',
-  //     'css/flexwrap',
+      'css/flexwrap',
   //     'css/fontface',
   //     'css/generatedcontent',
   //     'css/gradients',
@@ -117,8 +89,8 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'css/invalid',
   //     'css/lastchild',
   //     'css/mask',
-  //     'css/mediaqueries',
-  //     'css/multiplebgs',
+      'css/mediaqueries',
+      'css/multiplebgs',
   //     'css/nthchild',
   //     'css/objectfit',
   //     'css/opacity',
@@ -129,7 +101,7 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'css/pseudotransitions',
   //     'css/reflections',
   //     'css/regions',
-  //     'css/remunit',
+      'css/remunit',
   //     'css/resize',
   //     'css/rgba',
   //     'css/scrollbars',
@@ -140,10 +112,10 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'css/target',
   //     'css/textalignlast',
   //     'css/textshadow',
-  //     'css/transforms',
-  //     'css/transforms3d',
+      'css/transforms',
+      'css/transforms3d',
   //     'css/transformstylepreserve3d',
-  //     'css/transitions',
+      'css/transitions',
   //     'css/userselect',
   //     'css/valid',
   //     'css/vhunit',
@@ -271,7 +243,7 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'storage/sessionstorage',
   //     'storage/websqldatabase',
   //     'style/scoped',
-  //     'svg',
+      'svg',
   //     'svg/asimg',
   //     'svg/clippaths',
   //     'svg/filters',
@@ -314,10 +286,7 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
   //     'workers/transferables',
   //     'workers/webworkers',
   //     'xdomainrequest'
-  //   ],
-
-
-  //   uglify: true,
+    ],
 
   //   tests: [
   //     'css_boxsizing',
@@ -336,10 +305,11 @@ gulp.task('modernizr', ['scripts', 'styles'], (done)=> {
 
   //   matchCommunityTests: true
 
-  // }
+  }
 
-  // modernizr(customizerOpts, (a)=> {
-  //   console.log('modernizr', a)
-  //   done()
-  // })
+  modernizr.build(customizerOpts, (contents)=> {
+    // console.log('modernizr', contents)
+    fs.writeFileSync(path.resolve(themeDir, 'scripts/vendors/modernizr.js'), contents);
+    done()
+  })
 })

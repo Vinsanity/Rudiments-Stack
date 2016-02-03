@@ -2,7 +2,7 @@
 
 A framework for deploying WordPress projects with Capistrano.
 
-This framework is intended for WordPress projects where you(the developer/designer/agency) need to control the production environment and lock it down. After all, your production site is not just a website, it's an application. 
+This framework is intended for WordPress projects where you(the developer/designer/agency) need to control the production environment and lock it down. After all, your production site is not just a website, it's an application.
 
 - Automates WordPress deployments via git/github/bitbucket on any number of environments
 - Allows for deployments and automation from within Vagrant while outside the virtual box
@@ -18,14 +18,13 @@ For Rudiments Stack (or Capistrano in general) to work you need SSH access both 
 Capistrano deploys your application into a symlinked `current/` directory on your server, so you'll need to set your document root to that folder.
 
 - **[Ruby Gems](https://rubygems.org/pages/download)**: Rudiments Stack uses multiple gems so you should make sure this is installed or updated to the latest version first.
-- **[Bundler](http://bundler.io/)**: Rudiments Stack uses Bundler as a Ruby Dependency manager. 
-- **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. These commands are required on all stages (local, staging, production, etc.) so be sure to install this toll on all stages. 
+- **[Bundler](http://bundler.io/)**: Rudiments Stack uses Bundler as a Ruby Dependency manager.
+- **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. These commands are required on all stages (local, staging, production, etc.) so be sure to install this toll on all stages.
 - **[Node.js and npm](https://docs.npmjs.com/getting-started/installing-node)**: Node.js and npm are required to manage theme development dependancies.
-- **[Bower](http://bower.io/)**: Rudiments Stack uses bower as a theme development package manager for your frameworks, libraries, and utilities. 
-- **[Grunt](http://gruntjs.com/getting-started)**: Rudiments stack uses Grunt as a theme development task and build manager.
+- **[Gulp](http://gulpjs.com/)**: Rudiments stack uses Gulp as a theme development task and build manager.
 
 *Why am I installing all this stuff?*
-Because it is a "Stack". Also, you're a professional. Your application should be treated the same way. 
+Because it is a "Stack". Also, you're a professional. Your application should be treated the same way.
 - - -
 
 ## Installation
@@ -87,7 +86,7 @@ set :branch, "master"
 ```
 This is where you define your SSH access to the remote server, and the full path which you plan to deploy to. The `stage_url` is used when generating your `wp-config.php` file during installation.
 
-`server` can be an IP address or domain; prefixing with `http://` is not needed either way. 
+`server` can be an IP address or domain; prefixing with `http://` is not needed either way.
 
 `SSHUSER` should be whichever user owns the directory you've set in  `:deploy_to`. Additional options are found in the stage config files for SSH passwords and other access related options.
 
@@ -186,6 +185,6 @@ To update the WordPress submodule to the latest version, run:
 ```sh
 $ bundle exec cap production wp:core:update
 ```
-__CREDITS:__ 
+__CREDITS:__
 - Based on a fork of https://github.com/Mixd/wp-deploy from Mixd.
 - Theory based on https://github.com/markjaquith/WP-Stack and https://github.com/markjaquith/WordPress-Skeleton
