@@ -14,6 +14,7 @@ gulp.task('modernizr', (done)=> {
   const customizerOpts = {
 
     options: [
+      'setClasses',
       'addTest',
       'domPrefixes',
       'hasEvent',

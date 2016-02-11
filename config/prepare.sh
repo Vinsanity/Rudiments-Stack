@@ -1,7 +1,7 @@
 rm -rf .git
 git init
 rm -rf wp
-git submodule add -b 4.2-branch https://github.com/WordPress/WordPress.git wp
+git submodule add -b 4.4-branch https://github.com/WordPress/WordPress.git wp
 git clone https://bitbucket.org/3five/rudiments.git content/themes/threefive-rudiments
 rm -rf content/themes/threefive-rudiments/.git
 npm install
