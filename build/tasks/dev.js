@@ -19,6 +19,7 @@ gulp.task('dev', ['build'], ()=> {
       proxy: __pkg._criticalUrl,
       files: [
         `${themeRelPath}/assets/js/*.js`,
+        `${themeRelPath}/assets/css/*.css`,
         `${themeRelPath}/**/*.php`
       ]
     })
