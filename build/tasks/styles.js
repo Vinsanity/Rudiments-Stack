@@ -3,13 +3,18 @@ import gulp         from 'gulp'
 import sass         from 'gulp-sass'
 import sourcemaps   from 'gulp-sourcemaps'
 import postcss      from 'gulp-postcss'
+import gulpif       from 'gulp-if'
 import critical     from 'critical'
 import autoprefixer from 'autoprefixer'
 import mqpacker     from 'css-mqpacker'
 import flexibility  from 'postcss-flexibility'
+import {includes}   from 'lodash'
+import BrowserSync  from 'browser-sync'
 
+const browserSync = BrowserSync.create()
 const themeDir = path.resolve(__pkg._themepath)
 const args = global.__args
+const useSync = (includes(args._, 'dev') && args.sync)
 
 gulp.task('styles', ()=> {
 
@@ -20,7 +25,6 @@ gulp.task('styles', ()=> {
 
   const processors = [
     autoprefixer({ browsers: ['last 2 versions'] }),
-    mqpacker(),
     flexibility()
   ]
 
@@ -32,6 +36,7 @@ gulp.task('styles', ()=> {
     .pipe(sass(sassOpts).on('error', sass.logError))
     .pipe(postcss(processors))
   .pipe(sourcemaps.write('./'))
+  .pipe(gulpif(useSync, browserSync.stream({match: '**/*.css'})))
   .pipe(gulp.dest(`${themeDir}/assets/css`))
 
 })
