@@ -9,8 +9,10 @@ global.__args = require('yargs')
   .default('env', 'development')
   .boolean('production')
   .boolean('debug')
+  .boolean('sync')
   .alias('D', 'debug')
   .alias('p', 'production')
+  .alias('s', 'sync')
   .argv
 
 if (global.__args.production) {

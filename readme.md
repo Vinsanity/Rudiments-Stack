@@ -22,6 +22,7 @@ Capistrano deploys your application into a symlinked `current/` directory on you
 - **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. These commands are required on all stages (local, staging, production, etc.) so be sure to install this toll on all stages.
 - **[Node.js and npm](https://docs.npmjs.com/getting-started/installing-node)**: Node.js and npm are required to manage theme development dependancies.
 - **[Gulp](http://gulpjs.com/)**: Rudiments stack uses Gulp as a theme development task and build manager.
+- **[Browsersync](https://www.browsersync.io/)**: Rudiments stack uses Browsersync for asynchronous asset loading (scripts, stylesheets, etc.) during development.
 
 *Why am I installing all this stuff?*
 Because it is a "Stack". Also, you're a professional. Your application should be treated the same way.
