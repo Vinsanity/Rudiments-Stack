@@ -4,7 +4,7 @@ const themeDir = path.resolve(__pkg._themepath)
 const args = global.__args
 
 export default {
-  context: path.resolve(themeDir, 'scripts'),
+  context: path.resolve(themeDir, 'assets/src/js'),
 
   entry: {
     scripts: './compose',
@@ -12,7 +12,7 @@ export default {
   },
 
   output: {
-    path: path.resolve(themeDir, 'assets', 'js'),
+    path: path.resolve(themeDir, 'assets/dist', 'js'),
     filename: '[name].js'
   },
 

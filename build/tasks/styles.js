@@ -28,15 +28,15 @@ gulp.task('styles', ()=> {
   ]
 
   return gulp.src([
-    `${themeDir}/scss/master.scss`,
-    `${themeDir}/scss/wp-admin/login.scss`,
+    `${themeDir}/assets/src/scss/master.scss`,
+    `${themeDir}/assets/src/scss/wp-admin/login.scss`,
   ])
   .pipe(sourcemaps.init())
     .pipe(sass(sassOpts).on('error', sass.logError))
     .pipe(postcss(processors))
   .pipe(sourcemaps.write('./'))
   .pipe(gulpif(useSync, browserSync.stream({match: '**/*.css'})))
-  .pipe(gulp.dest(`${themeDir}/assets/css`))
+  .pipe(gulp.dest(`${themeDir}/assets/dist/css`))
 
 })
 
@@ -59,7 +59,7 @@ gulp.task('styles:inline', ['styles'], (done)=> {
 
   const criticalOpts = {
     src,
-    dest: `${themeDir}/assets/css/inline.css`,
+    dest: `${themeDir}/assets/dist/css/inline.css`,
     // pathPrefix: '/content/themes/threefive-rudiments/assets/css',
     minify: false,
     dimensions

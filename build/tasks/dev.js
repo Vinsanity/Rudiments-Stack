@@ -8,16 +8,16 @@ const args = global.__args
 
 gulp.task('dev', ['build'], ()=> {
   compiler.watch({}, handleWebpackResults(true))
-  gulp.watch(`${__pkg._themepath}/scss/**/*.scss`, ['styles'])
-  gulp.watch(`${__pkg._themepath}/images/**/*`, ['images'])
-  gulp.watch(`${__pkg._themepath}/fonts/**/*`, ['static'])
+  gulp.watch(`${__pkg._themepath}/assets/src/scss/**/*.scss`, ['styles'])
+  gulp.watch(`${__pkg._themepath}/assets/src/img/**/*`, ['images'])
+  gulp.watch(`${__pkg._themepath}/assets/src/fonts/**/*`, ['static'])
 
   if (args.sync) {
     browserSync.init({
       proxy: __pkg._criticalUrl,
       files: [
-        `${__pkg._themepath}/assets/js/*.js`,
-        `${__pkg._themepath}/assets/css/*.css`,
+        `${__pkg._themepath}/assets/dist/js/*.js`,
+        `${__pkg._themepath}/assets/dist/css/*.css`,
         `${__pkg._themepath}/**/*.php`
       ]
     })

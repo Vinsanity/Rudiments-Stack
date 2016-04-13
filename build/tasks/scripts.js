@@ -310,7 +310,7 @@ gulp.task('modernizr', (done)=> {
 
   modernizr.build(customizerOpts, (contents)=> {
     // console.log('modernizr', contents)
-    fs.writeFileSync(path.resolve(themeDir, 'scripts/vendors/modernizr.js'), contents);
+    fs.writeFileSync(path.resolve(themeDir, 'assets/src/js/vendors/modernizr.js'), contents);
     done()
   })
 })

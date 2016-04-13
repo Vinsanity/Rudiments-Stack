@@ -13,8 +13,8 @@ gulp.task('images', ()=> {
   }
 
   return gulp.src([
-    `${themeDir}/images/**/*.{png,jpg,jpeg,gif,svg}`
+    `${themeDir}/assets/src/img/**/*.{png,jpg,jpeg,gif,svg}`
   ])
   .pipe(imagemin(opts))
-  .pipe(gulp.dest(`${themeDir}/assets/images`))
+  .pipe(gulp.dest(`${themeDir}/assets/dist/img`))
 })
