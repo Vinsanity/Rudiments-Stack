@@ -1,12 +1,12 @@
-import gulp from 'gulp'
-const args = global.__args
+import gulp from 'gulp';
 
-gulp.task('default', ['build'])
+const args = global.__args;
+const buildTasks = ['scripts', 'styles', 'images', 'static'];
 
-const buildTasks = ['scripts', 'styles', 'images', 'static']
+gulp.task('default', ['build']);
 
 if (args.env === 'production') {
-  buildTasks.push('styles:inline')
+    buildTasks.push('styles:inline')
 }
 
-gulp.task('build', buildTasks)
+gulp.task('build', buildTasks);
