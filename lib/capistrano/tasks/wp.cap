@@ -4,6 +4,9 @@ namespace :wp do
     on roles(:app) do
       execute :chmod, "666 #{shared_path}/.htaccess"
       execute :chmod, "-R 777 #{shared_path}/content/uploads"
+      execute :setfacl, "-R -m u:apache:rwx #{shared_path}/content/uploads"
+      execute :setfacl, "-R -d -m g::rwx #{shared_path}/content/uploads"
+      execute :setfacl, "-R -d -m o::rwx #{shared_path}/content/uploads"
     end
   end
 
