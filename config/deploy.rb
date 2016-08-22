@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.1.0'
+lock '3.6.0'
 
 # Uncomment this line if you're using vagrant as your localhost
 # set :vagrant_local, true
