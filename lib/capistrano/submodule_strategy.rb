@@ -1,4 +1,6 @@
-module SubmoduleStrategy
+require "capistrano/scm/git"
+
+class GitSubModule < Capistrano::SCM::Git
   # do all the things a normal capistrano git session would do
   include Capistrano::Git::DefaultStrategy
   

@@ -4,9 +4,13 @@ require 'capistrano/setup'
 # Includes default deployment tasks
 require 'capistrano/deploy'
 
+# Use Git as SCM
+require 'capistrano/scm/git'
+install_plugin Capistrano::SCM::Git
+
 # Include custom strategy for deploying git submodules
-require 'capistrano/git'
-require './lib/capistrano/submodule_strategy'
+require_relative './lib/capistrano/submodule_strategy.rb'
+install_plugin GitSubModule
 
 # Includes everything else
 require 'yaml'
