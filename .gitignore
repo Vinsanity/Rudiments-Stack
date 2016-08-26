@@ -15,6 +15,7 @@ Thumbs.db
 ###################
 .htaccess
 wp/*
+!wp/.gitkeep
 sitemap.xml
 sitemap.xml.gz
 content/uploads/*
