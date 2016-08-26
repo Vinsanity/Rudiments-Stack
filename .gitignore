@@ -14,11 +14,9 @@ Thumbs.db
 # Wordpress files #
 ###################
 .htaccess
-xmlrpc.php
+wp/*
 sitemap.xml
 sitemap.xml.gz
-readme.html
-license.txt
 content/uploads/*
 content/upgrade/*
 content/cache/*
@@ -29,6 +27,7 @@ wp-config.php
 ###################
 _assets
 node_modules
+vendor
 # dev/node_modules/.bin
 # dev/node_modules/**/.bin
 # dev/node_modules/**/out
