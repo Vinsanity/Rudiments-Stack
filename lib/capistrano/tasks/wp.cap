@@ -85,8 +85,7 @@ namespace :wp do
     task :local do
 
       if fetch(:vagrant_local)
-        invoke(:vagrant)
-        on roles(:localhost) do |host|
+        on roles(:dev) do |host|
           within fetch(:deploy_to) do
 
           if !fetch(:setup_all)
@@ -185,21 +184,6 @@ namespace :wp do
       # Setup remote and local envs
       invoke "wp:setup:remote"
       invoke "wp:setup:local"
-    end
-  end
-
-  namespace :core do
-    desc "Updates the WP core submodule to the latest tag"
-    task :update do
-      system('
-      cd wp
-      git fetch --tags
-      latestTag=$(git tag -l | sort -n -r -t. -k1,1 -k2,2 -k3,3 -k4,4 | sed -n 1p)
-      git checkout $latestTag
-      ')
-      invoke 'cache:repo:purge'
-      puts "WordPress submodule is now at the latest version. You should now commit your changes."
-
     end
   end
 

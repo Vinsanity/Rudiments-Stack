@@ -2,6 +2,7 @@
 ######################
 *.log
 *.sql
+*.sql.gz
 *.sqlite
 database.yml
 
