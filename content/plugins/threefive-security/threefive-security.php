@@ -2,8 +2,8 @@
 /*
 Plugin Name: 3five Security
 Description: Add a series of security best practices
-Author: Modern Tribe, Inc.
-Author URI: http://tri.be
+Author: 3five
+Author URI: http://3five.com
 Version: 1.0
 */
 
