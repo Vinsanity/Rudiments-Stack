@@ -1,9 +1,6 @@
 # config valid only for Capistrano 3.6.1
 lock '3.6.1'
 
-# Uncomment this line if you're using vagrant as your localhost
-# set :vagrant_local, true
-
 ############################################
 # Setup WordPress
 ############################################
