@@ -30,7 +30,7 @@ set :wpcli_local_db_backup_dir, 'db_backups/'
 
 ## Vagrant WPCLI Settings
 # THIS MUST BE SET FOR WPCLI TO WORK.
-server fetch(:wp_localserver), user: 'vagrant', password: 'vagrant', roles: %w{dev} # Change this only if it differs from :wp_localserver
+server fetch(:wp_localserver), user: 'vagrant', password: 'vagrant', roles: %w{dev}, no_release: true # Change this only if it differs from :wp_localserver
 set :dev_path, "/srv/www/example/htdocs" # Vagrant dev path for WPCLI usage.
 
 ############################################
