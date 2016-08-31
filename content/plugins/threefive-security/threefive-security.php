@@ -1,11 +1,16 @@
 <?php
-/*
-Plugin Name: 3five Security
-Description: Add a series of security best practices
-Author: 3five
-Author URI: http://3five.com
-Version: 1.0
-*/
+/**
+ * 3five Security Plugin
+ * Special thanks to Modern Tribe
+ *
+ * Plugin Name:       3five Security
+ * Description:       Add a series of security best practices
+ * Author:            3five
+ * Author URI:        http://3five.com
+ * Version:           1.0
+ * License:           GPL2
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
 
 /**
  * Load all the plugin files and initialize appropriately
