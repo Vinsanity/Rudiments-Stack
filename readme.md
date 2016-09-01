@@ -14,7 +14,7 @@ This framework is intended for WordPress projects where you(the developer/design
 ## Assumptions
 - You are using Vagrant as your local dev environment.
 - You have experience using the command line. (Terminal, iTerm, PowerShell, etc) 
-- You have experience installing packages with package managers.
+- You have experience installing and managing packages with package managers.
 
 ## Requirements
 
@@ -23,9 +23,10 @@ For Rudiments Stack (or Capistrano in general) to work you need SSH access both 
 Capistrano deploys your application into a symlinked `current/` directory on your server, so you'll need to set your document root to that folder in your nginx or apache .conf file.
 
 - **[Ruby Gems](https://rubygems.org/pages/download)**: Rudiments Stack uses multiple gems so you should make sure this is installed or updated to the latest version first.
-- **[Bundler](http://bundler.io/)**: Rudiments Stack uses Bundler as a Ruby Dependency manager.
-- **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress functions directly in the Command Line. These commands are required on all stages (local/development, staging, production, etc.) so be sure to install this tool on all stages.
-- **[Node.js and npm](https://docs.npmjs.com/getting-started/installing-node)**: Node.js and npm are required to manage theme development dependancies.
+- **[Bundler](http://bundler.io/)**: Rudiments Stack uses Bundler to manage capistrano's dependencies.
+- **[Composer](https://getcomposer.org/download/)**: Rudiments Stack uses Composer to manage WordPress Core. Required on all stages (local/development, staging, production, etc.) to install WordPress.
+- **[WP-CLI](http://wp-cli.org/)**: Rudiments Stack also requires the automation of WordPress management directly in the Command Line. These commands are required on all stages so be sure to install this tool on all stages.
+- **[Node.js and npm](https://docs.npmjs.com/getting-started/installing-node)**: Node.js and npm are required to manage theme development dependencies.
 - **[Gulp](http://gulpjs.com/)**: Rudiments stack uses Gulp as a theme development task and build manager.
 - **[Browsersync](https://www.browsersync.io/)**: Rudiments stack uses Browsersync for asynchronous asset loading (scripts, stylesheets, etc.) during development.
 
