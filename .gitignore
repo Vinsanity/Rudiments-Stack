@@ -29,6 +29,9 @@ wp-config.php
 ###################
 _assets
 node_modules
+vendor/*
+wp/*
+!wp/.gitkeep
 # dev/node_modules/.bin
 # dev/node_modules/**/.bin
 # dev/node_modules/**/out
