@@ -1,60 +1,60 @@
 <?php
-  define('DB_NAME', '<%= database['database'] %>');
-  define('DB_USER', '<%= database['username'] %>');
-  define('DB_PASSWORD', '<%= database['password'] %>');
-  define('DB_HOST', '<%= database['host'] %>');
-  define('DB_CHARSET', 'utf8');
-  define('DB_COLLATE', '');
-  define('WPLANG', '');
+  define( 'DB_NAME', '<%= database['database'] %>' );
+  define( 'DB_USER', '<%= database['username'] %>' );
+  define( 'DB_PASSWORD', '<%= database['password'] %>' );
+  define( 'DB_HOST', '<%= database['host'] %>' );
+  define( 'DB_CHARSET', 'utf8' );
+  define( 'DB_COLLATE', '' );
+  define( 'WPLANG', '' );
 
   $table_prefix  = 'wp_';
 
   <%= secret_keys %>
 
-  define('WP_HOME','<%= wp_siteurl %>');
-  define('WP_SITEURL','<%= wp_siteurl %>/wp');
+  define( 'WP_HOME','<%= wp_siteurl %>' );
+  define( 'WP_SITEURL','<%= wp_siteurl %>/wp' );
 
-  define('WP_CONTENT_URL', '<%= wp_siteurl %>/content');
+  define( 'WP_CONTENT_URL', '<%= wp_siteurl %>/content' );
 
   // Set Default Theme
-  define('WP_DEFAULT_THEME', 'threefive-rudiments');
+  define( 'WP_DEFAULT_THEME', 'threefive-rudiments' );
 
   /*
   Depending on your server configuration, you may find WordPress fails to find your content (themes and plugins).
   This is due to how your server returns `$_SERVER['DOCUMENT_ROOT']`. If this issue affects you, try swapping
-  for the `dirname(__FILE__)` method below.
+  for the `dirname( __FILE__ )` method below.
   */
 
   <% if remote_config == true %>
-  define('WP_CONTENT_DIR', realpath($_SERVER['DOCUMENT_ROOT'] . '/content'));
+  define( 'WP_CONTENT_DIR', dirname( dirname( __FILE__ ) ). '/current/content' ) );
 
   // Production Settings
-  define('WP_DEBUG', false);
-  define('WP_DEBUG_LOG', false);
-  define('WP_DEBUG_DISPLAY', false);
-  define('DISALLOW_FILE_EDIT', true);
-  define('DISALLOW_FILE_MODS', true);
-  define('WP_CACHE', true);
-  define('COMPRESS_CSS', true);
-  define('COMPRESS_SCRIPTS', true);
-  define('CONCATENATE_SCRIPTS', true);
-  define('IMAGE_EDIT_OVERWRITE', true);
-  define('WP_POST_REVISIONS', 10);
-  define('ENVIRONMENT', 'PRODUCTION');
+  define( 'WP_DEBUG', false );
+  define( 'WP_DEBUG_LOG', false );
+  define( 'WP_DEBUG_DISPLAY', false );
+  define( 'DISALLOW_FILE_EDIT', true );
+  define( 'DISALLOW_FILE_MODS', true );
+  define( 'WP_CACHE', true );
+  define( 'COMPRESS_CSS', true );
+  define( 'COMPRESS_SCRIPTS', true );
+  define( 'CONCATENATE_SCRIPTS', true );
+  define( 'IMAGE_EDIT_OVERWRITE', true );
+  define( 'WP_POST_REVISIONS', 10 );
+  define( 'ENVIRONMENT', 'PRODUCTION' );
 
   <% else %>
-  define('WP_CONTENT_DIR', realpath(dirname(__FILE__) . '/content'));
+  define( 'WP_CONTENT_DIR', dirname( dirname( __FILE__ ) ). '/content' ) );
 
   // Development Settings
-  define('WP_DEBUG', true);
-  define('WP_DEBUG_LOG', true);
-  define('WP_DEBUG_DISPLAY', true);
-  define('ENVIRONMENT', 'DEVELOPMENT');
+  define( 'WP_DEBUG', true );
+  define( 'WP_DEBUG_LOG', true );
+  define( 'WP_DEBUG_DISPLAY', true );
+  define( 'ENVIRONMENT', 'DEVELOPMENT' );
 
 
   <% end %>
 
-  if ( !defined('ABSPATH') )
-          define('ABSPATH', dirname(__FILE__) . '/');
+  if ( !defined( 'ABSPATH' ) )
+          define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 
-  require_once(ABSPATH . 'wp-settings.php');
+  require_once( ABSPATH . 'wp-settings.php' );
