@@ -26,7 +26,7 @@
   */
 
   <% if remote_config == true %>
-  define( 'WP_CONTENT_DIR', dirname( dirname( __FILE__ ) ). '/current/content' ) );
+  define( 'WP_CONTENT_DIR', dirname( dirname( __FILE__ ) ) . '/current/content' );
 
   // Production Settings
   define( 'WP_DEBUG', false );
@@ -43,7 +43,7 @@
   define( 'ENVIRONMENT', 'PRODUCTION' );
 
   <% else %>
-  define( 'WP_CONTENT_DIR', dirname( dirname( __FILE__ ) ). '/content' ) );
+  define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
 
   // Development Settings
   define( 'WP_DEBUG', true );
