@@ -55,6 +55,7 @@ Next, we need to setup the Rudiments Stack project locally. We're using a simple
 $ bash config/prepare.sh
 ```
 You can trust us or read this list to see what happens when you run that script.
+
 1. We remove the git repo you just cloned and reinitialize it to make it your own. 
 2. `bundle install` to install the Ruby gem dependencies.
 3. `composer install` to get you WordPress.
