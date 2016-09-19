@@ -6,7 +6,12 @@ require 'capistrano/deploy'
 
 # Include custom strategy for deploying git submodules
 require 'capistrano/git'
-require './lib/capistrano/submodule_strategy'
+
+# Include Capistrano's Composer plugin
+require 'capistrano/composer'
+
+# Include Capistrano's WP-CLI plugin
+require 'capistrano/wpcli'
 
 # Includes everything else
 require 'yaml'
