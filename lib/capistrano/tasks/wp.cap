@@ -31,12 +31,13 @@ namespace :wp do
       set :wp_pass, password
     end
 
-    task :do_setup do
+    # Installs WordPress
+    task :install
       config = Config.new
-      # Install WordPress
       execute :wp, "core install --url='#{config.url}' --title='#{config.title}' --admin_user='#{config.user}' --admin_password='#{config.password}' --admin_email='#{config.email}' --path='wp'"
     end
 
+    # Prints report for the user
     task :report do
       config = Config.new
 
@@ -87,56 +88,48 @@ namespace :wp do
       invoke 'wp:set_permissions'
     end
 
-    desc "Setup WP on remote environment"
-    task :remote => ['wp:setup:generate_password'] do
+    # Installs WordPress and supporting files on remote server
+    task :remote_install => 'wp:setup:generate_password' do
       invoke 'deploy'
       invoke 'wp:setup:generate_remote_files'
+
+      set :wp_target_url, fetch(:stage_url)
+
       on roles(:web) do
-
         within release_path do
-          set :wp_target_url, fetch(:stage_url)
-          invoke 'wp:setup:do_setup'
-        end
-
-        if !fetch(:setup_all)
-          invoke 'wp:setup:report'
+          invoke 'wp:setup:install'
         end
       end
     end
 
-    desc "Setup WP on local environment"
-    task :local => ['wp:setup:generate_password'] do
+    # Installs WordPress and supporting files locally
+    task :local_install => 'wp:setup:generate_password' do
+      set :wp_target_url, fetch(:wp_localurl)
 
       if fetch(:vagrant_local)
         on roles(:dev) do |host|
           within fetch(:deploy_to) do
-            set :wp_target_url, fetch(:wp_localurl)
             invoke 'wp:setup:generate_local_files'
-            invoke 'wp:setup:do_setup'
+            invoke 'wp:setup:install'
           end
         end
-
       else
-
         run_locally do
-          set :wp_target_url, fetch(:wp_localurl)
           invoke 'wp:setup:generate_local_files'
-          invoke 'wp:setup:do_setup'
+          invoke 'wp:setup:install'
         end
-
       end
-
-      invoke 'wp:setup:report'
     end
+
+    desc "Setup WP on remote environment"
+    task :remote => ['wp:setup:remote_install', 'wp:setup:report']
+
+    desc "Setup WP on local environment"
+    task :local => ['wp:setup:local_install', 'wp:setup:report']
 
     desc "Setup WP on remote and local environments"
-    task :both => ['wp:setup:generate_password'] do
-      set :setup_all, true
+    task :both => ['wp:setup:remote_install', 'wp:setup:local_install', 'wp:setup:report']
 
-      # Setup remote and local envs
-      invoke "wp:setup:remote"
-      invoke "wp:setup:local"
-    end
   end
 
 end
