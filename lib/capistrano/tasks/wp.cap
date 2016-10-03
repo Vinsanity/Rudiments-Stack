@@ -1,3 +1,15 @@
+class Config
+  attr_reader :title, :email, :user, :password, :url
+  def initialize(options)
+    # Get WP details from config in /config
+    @title = fetch(:wp_sitename) || options.fetch(:title)
+    @email = fetch(:wp_email) || options.fetch(:email)
+    @user = fetch(:wp_user) || options.fetch(:user)
+    @password = fetch(:wp_pass) || options.fetch(:password)
+    @url = fetch(:wp_target_url) || options.fetch(:url)
+  end
+end
+
 namespace :wp do
 
   task :set_permissions do
@@ -20,19 +32,30 @@ namespace :wp do
     end
 
     task :do_setup do
-      # Get WP details from config in /config
-      title = fetch(:wp_sitename)
-      email = fetch(:wp_email)
-      user = fetch(:wp_user)
-      password = fetch(:wp_pass)
-      wp_siteurl = fetch(:wp_target_url)
-
+      config = Config.new
       # Install WordPress
-      execute :wp, "core install --url='#{wp_siteurl}' --title='#{title}' --admin_user='#{user}' --admin_password='#{password}' --admin_email='#{email}' --path='wp'"
+      execute :wp, "core install --url='#{config.url}' --title='#{config.title}' --admin_user='#{config.user}' --admin_password='#{config.password}' --admin_email='#{config.email}' --path='wp'"
     end
 
-    # Create wp-config.php
-    task :create_wp_config do
+    task :report do
+      config = Config.new
+
+      puts <<-MSG
+      \e[32m
+      =========================================================================
+        WordPress has successfully been installed. Here are your login details:
+
+        Username:       #{config.user}
+        Password:       #{config.password}
+        Email address:  #{config.email}
+        Log in at:      #{config.url}/wp/wp-admin
+      =========================================================================
+      \e[0m
+      MSG
+    end
+
+    # Creates wp-config.php locally
+    task :generate_local_files do
       database = YAML::load_file('config/database.yml')['local']
       secret_keys = capture("curl -s -k https://api.wordpress.org/secret-key/1.1/salt")
       db_config = ERB.new(File.read('config/templates/wp-config.php.erb')).result(binding)
@@ -73,24 +96,11 @@ namespace :wp do
         within release_path do
           set :wp_target_url, fetch(:stage_url)
           invoke 'wp:setup:do_setup'
-
-          if !fetch(:setup_all)
-            puts <<-MSG
-            \e[32m
-            =========================================================================
-              WordPress has successfully been installed. Here are your login details:
-
-              Username:       #{user}
-              Password:       #{password}
-              Email address:  #{email}
-              Log in at:      #{wp_siteurl}/wp/wp-admin
-            =========================================================================
-            \e[0m
-            MSG
-          end
-
         end
 
+        if !fetch(:setup_all)
+          invoke 'wp:setup:report'
+        end
       end
     end
 
@@ -101,22 +111,8 @@ namespace :wp do
         on roles(:dev) do |host|
           within fetch(:deploy_to) do
             set :wp_target_url, fetch(:wp_localurl)
-            invoke 'wp:setup:create_wp_config'
+            invoke 'wp:setup:generate_local_files'
             invoke 'wp:setup:do_setup'
-
-            puts <<-MSG
-            \e[32m
-            =========================================================================
-              WordPress has successfully been installed. Here are your login details:
-
-              Username:       #{user}
-              Password:       #{password}
-              Email address:  #{email}
-              Log in at:      #{wp_siteurl}/wp/wp-admin
-            =========================================================================
-            \e[0m
-            MSG
-
           end
         end
 
@@ -124,24 +120,13 @@ namespace :wp do
 
         run_locally do
           set :wp_target_url, fetch(:wp_localurl)
-          invoke 'wp:setup:create_wp_config'
+          invoke 'wp:setup:generate_local_files'
           invoke 'wp:setup:do_setup'
-
-          puts <<-MSG
-          \e[32m
-          =========================================================================
-            WordPress has successfully been installed. Here are your login details:
-
-            Username:       #{user}
-            Password:       #{password}
-            Email address:  #{email}
-            Log in at:      #{wp_siteurl}/wp/wp-admin
-          =========================================================================
-          \e[0m
-          MSG
         end
 
       end
+
+      invoke 'wp:setup:report'
     end
 
     desc "Setup WP on remote and local environments"
