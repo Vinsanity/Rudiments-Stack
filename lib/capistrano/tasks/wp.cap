@@ -57,11 +57,13 @@ namespace :wp do
 
     # Creates wp-config.php locally
     task :generate_local_files do
-      database = YAML::load_file('config/database.yml')['local']
-      secret_keys = capture("curl -s -k https://api.wordpress.org/secret-key/1.1/salt")
-      db_config = ERB.new(File.read('config/templates/wp-config.php.erb')).result(binding)
-      remote_config = false
-      File.open("wp-config.php", 'w') {|f| f.write(db_config) }
+      on roles(:web) do
+        database = YAML::load_file('config/database.yml')['local']
+        secret_keys = capture("curl -s -k https://api.wordpress.org/secret-key/1.1/salt")
+        db_config = ERB.new(File.read('config/templates/wp-config.php.erb')).result(binding)
+        remote_config = false
+        File.open("wp-config.php", 'w') {|f| f.write(db_config) }
+      end
     end
 
     desc "Generates wp-config.php on remote server"
