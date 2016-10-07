@@ -1,12 +1,12 @@
 class Config
   attr_reader :title, :email, :user, :password, :url
-  def initialize(options)
+  def initialize
     # Get WP details from config in /config
-    @title = fetch(:wp_sitename) || options.fetch(:title)
-    @email = fetch(:wp_email) || options.fetch(:email)
-    @user = fetch(:wp_user) || options.fetch(:user)
-    @password = fetch(:wp_pass) || options.fetch(:password)
-    @url = fetch(:wp_target_url) || options.fetch(:url)
+    @title = fetch(:wp_sitename)
+    @email = fetch(:wp_email)
+    @user = fetch(:wp_user)
+    @password = fetch(:wp_pass)
+    @url = fetch(:wp_target_url)
   end
 end
 
